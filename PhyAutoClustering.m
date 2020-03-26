@@ -198,9 +198,9 @@ for ii=1:length(cids)
         if any(goodIx==ii)
 %             fwrite(fid, sprintf('%d\t%s\r\n', cids(ii), 'good'));
         elseif any(muaIx==ii)
-            fwrite(fid, sprintf('%d\t%s\r\n', cids(ii), 'mua'));
+%            fwrite(fid, sprintf('%d\t%s\r\n', cids(ii), 'mua'));
         elseif any(noiseIx==ii)
-            fwrite(fid, sprintf('%d\t%s\r\n', cids(ii), 'noise'));
+%            fwrite(fid, sprintf('%d\t%s\r\n', cids(ii), 'noise'));
         end
     end
 end

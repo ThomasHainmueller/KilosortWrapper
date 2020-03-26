@@ -58,6 +58,24 @@ switch(electrode_type)
             xcoords = cat(1,xcoords,x(:));
             ycoords = cat(1,ycoords,y(:));
         end
+    case 'staggered-wide'
+        % Bugfix for Kilosort2 to enforce sorting within channel (kcoords
+        % dosen't work as of now (2020/03/25)
+        for a= 1:ngroups %being super lazy and making this map with loops
+            x = [];
+            y = [];
+            tchannels  = groups{a};
+            for i =1:length(tchannels)
+                x(i) = 20;%length(tchannels)-i;
+                y(i) = -i*20;
+                if mod(i,2)
+                    x(i) = -x(i);
+                end
+            end
+            x = x+a*1000;
+            xcoords = cat(1,xcoords,x(:));
+            ycoords = cat(1,ycoords,y(:));
+        end
     case 'poly3'
         disp('poly3 probe layout')
         for a= 1:ngroups %being super lazy and making this map with loops
@@ -137,7 +155,7 @@ Nchannels = length(xcoords);
 
 kcoords = zeros(1,Nchannels);
 switch(electrode_type)
-    case {'staggered','poly3','poly5','twohundred'}
+    case {'staggered','staggered-wide','poly3','poly5','twohundred'}
         for a= 1:ngroups
             kcoords(groups{a}+1) = a;
         end
