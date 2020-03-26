@@ -127,9 +127,9 @@ switch(electrode_type)
             tchannels  = groups{a};
             for i =1:length(tchannels)
                 x(i) = length(tchannels)-i;
-                y(i) = -i*30;
+                y(i) = -i*50;
             end
-            x = x+a*30;
+            x = x+a*50;
             xcoords = cat(1,xcoords,x(:));
             ycoords = cat(1,ycoords,y(:));
         end
@@ -171,11 +171,11 @@ connected = true(Nchannels, 1);
 % % order = [par.AnatGrps.Channels];
 % % skip = find([par.AnatGrps.Skip]);
 % % connected(order(skip)+1) = false;
-% order = [par.AnatGrps.Channels];
-% if isfield(par,'SpkGrps')
-%     skip2 = find(~ismember([par.AnatGrps.Channels], [par.SpkGrps.Channels])); % finds the indices of the channels that are not part of SpkGrps
-%     connected(order(skip2)+1) = false;
-% end
+order = [par.AnatGrps.Channels];
+if isfield(par,'SpkGrps')
+    skip2 = find(~ismember([par.AnatGrps.Channels], [par.SpkGrps.Channels])); % finds the indices of the channels that are not part of SpkGrps
+    connected(order(skip2)+1) = false;
+end
 
 chanMap     = 1:Nchannels;
 chanMap0ind = chanMap - 1;
